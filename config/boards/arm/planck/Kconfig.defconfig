@@ -6,19 +6,19 @@
 if BOARD_PLANCK_LEFT
 
 config ZMK_KEYBOARD_NAME
-		default "PlanckBoy Color"
+    default "Planck Split"
 
 config ZMK_SPLIT_ROLE_CENTRAL
-		default y
-endif 
+    default y
+endif
 
 if BOARD_PLANCK_LEFT || BOARD_PLANCK_RIGHT
 
 config ZMK_SPLIT
-		default y
+    default y
 
 config BT_CTLR
-		default BT
+    default BT
 
 if USB
 
@@ -44,32 +44,37 @@ endif # ZMK_DISPLAY
 
 
 if LVGL
+
 config ZMK_DISPLAY_DEDICATED_THREAD_STACK_SIZE
-	default 8192
+    default 8192
 
 #config LV_HOR_RES_MAX
-	#default 128
+#   default 128
 #config LV_VER_RES_MAX
-	#default 32
+#   default 32
+
 config LV_Z_VDB_SIZE
-	default 64
+    default 64
 
 config LV_DPI_DEF
-	default 148
+    default 148
+
 config LV_Z_BITS_PER_PIXEL
-	default 1
+    default 1
+
 choice LV_COLOR_DEPTH
-	default LV_COLOR_DEPTH_1
+    default LV_COLOR_DEPTH_1
 endchoice
 
 endif # LVGL
 
 # config ZMK_WIDGET_WPM_STATUS
-# 	default y
+#   default y
 
 config I2C
-	default y
-config SPI
-	default y
+    default y
 
-endif 
+config SPI
+    default y
+
+endif
