@@ -6,6 +6,29 @@
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/rgb.h>
 
+#define MIRYOKU_SHIFT_FUNCTION(NAME, BINDING, SHIFT_BINDING) \
+/ { \
+  behaviors { \
+    NAME: NAME { \
+      compatible = "zmk,behavior-mod-morph"; \
+      #binding-cells = <0>; \
+      bindings = <BINDING>, <SHIFT_BINDING>; \
+      mods = <(MOD_LSFT|MOD_RSFT)>; \
+    }; \
+  }; \
+};
+
+#define MIRYOKU_SHIFT_MACRO(NAME, BINDING, SHIFT_BINDING) \
+U_MACRO(u_macro_ ## NAME, wait-ms = <0>; bindings = <SHIFT_BINDING>;) \
+MIRYOKU_SHIFT_FUNCTION(NAME, BINDING, &u_macro_ ## NAME)
+
+MIRYOKU_SHIFT_MACRO(u_bt_sel_0, &bt BT_SEL 0, &bt BT_SEL 0 &bt BT_CLR)
+MIRYOKU_SHIFT_MACRO(u_bt_sel_1, &bt BT_SEL 1, &bt BT_SEL 1 &bt BT_CLR)
+MIRYOKU_SHIFT_MACRO(u_bt_sel_2, &bt BT_SEL 2, &bt BT_SEL 2 &bt BT_CLR)
+MIRYOKU_SHIFT_MACRO(u_bt_sel_3, &bt BT_SEL 3, &bt BT_SEL 3 &bt BT_CLR)
+MIRYOKU_SHIFT_MACRO(u_bt_sel_4, &bt BT_SEL 4, &bt BT_SEL 4 &bt BT_CLR)
+
+
 #define U_TAPPING_TERM 200
 
 / {
@@ -60,7 +83,7 @@
             bindings = <
 &to 0      &none       &none       &none        &none        &none            &rgb_ug RGB_TOG    &rgb_ug RGB_EFF  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &to 4
 &kp CAPS   &kp LGUI    &kp LALT    &kp LCTRL    &kp LSHFT    &none            &ext_power EP_TOG  &kp C_PREV       &kp C_VOL_DN     &kp C_VOL_UP     &kp C_NEXT       &kp SQT
-&kp LSHFT  &none       &kp RALT    &none        &none        &none            &out OUT_TOG       &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &kp RSHFT
+&kp LSHFT  &none       &kp RALT    &none        &none        &none            &out OUT_TOG       &u_bt_sel_0      &u_bt_sel_1      &u_bt_sel_2      &u_bt_sel_3      &kp RSHFT
 &kp LCTRL  &kp LALT    &kp LGUI    &none        &none        &none            &kp C_STOP         &kp C_PP         &kp C_MUTE       &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
