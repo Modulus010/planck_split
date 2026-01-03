@@ -8,25 +8,25 @@
 
 #define U_MACRO(name,...) \
 / { \
-  macros { \
-    name: name { \
-      compatible = "zmk,behavior-macro"; \
-      #binding-cells = <0>; \
-      __VA_ARGS__ \
+    macros { \
+        name: name { \
+            compatible = "zmk,behavior-macro"; \
+            #binding-cells = <0>; \
+            __VA_ARGS__ \
+        }; \
     }; \
-  }; \
 };
 
 #define MIRYOKU_SHIFT_FUNCTION(NAME, BINDING, SHIFT_BINDING) \
 / { \
-  behaviors { \
-    NAME: NAME { \
-      compatible = "zmk,behavior-mod-morph"; \
-      #binding-cells = <0>; \
-      bindings = <BINDING>, <SHIFT_BINDING>; \
-      mods = <(MOD_LSFT|MOD_RSFT)>; \
+    behaviors { \
+        NAME: NAME { \
+            compatible = "zmk,behavior-mod-morph"; \
+            #binding-cells = <0>; \
+            bindings = <BINDING>, <SHIFT_BINDING>; \
+            mods = <(MOD_LSFT|MOD_RSFT)>; \
+        }; \
     }; \
-  }; \
 };
 
 #define MIRYOKU_SHIFT_MACRO(NAME, BINDING, SHIFT_BINDING) \
@@ -39,6 +39,15 @@ MIRYOKU_SHIFT_MACRO(u_bt_sel_2, &bt BT_SEL 2, &bt BT_SEL 2 &bt BT_CLR)
 MIRYOKU_SHIFT_MACRO(u_bt_sel_3, &bt BT_SEL 3, &bt BT_SEL 3 &bt BT_CLR)
 MIRYOKU_SHIFT_MACRO(u_bt_sel_4, &bt BT_SEL 4, &bt BT_SEL 4 &bt BT_CLR)
 
+#define U_MOUSE_MOVE_EXPONENT 1
+#define U_MOUSE_MOVE_TIME 1500
+#define U_MOUSE_MOVE_DELAY 0
+
+&mmv {
+    acceleration-exponent = <U_MOUSE_MOVE_EXPONENT>;
+    time-to-max-speed-ms = <U_MOUSE_MOVE_TIME>;
+    delay-ms = <U_MOUSE_MOVE_DELAY>;
+};
 
 #define U_TAPPING_TERM 200
 
@@ -59,7 +68,9 @@ MIRYOKU_SHIFT_MACRO(u_bt_sel_4, &bt BT_SEL 4, &bt BT_SEL 4 &bt BT_CLR)
             bindings = <&mo>, <&kp>;
         };
     };
+};
 
+/ {
     keymap {
         compatible = "zmk,keymap";
 
