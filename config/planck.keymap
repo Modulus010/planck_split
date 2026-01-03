@@ -2,110 +2,69 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
 
 / {
     keymap {
         compatible = "zmk,keymap";
 
-        // base
         base_layer {
-            // -----------------------------------------------------------------------------------------
-            // |  FUN |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  | NAV  |
-            // | CAPS |AG/S |AS/A |AD/C |AF/F |  G  |   |  H  |F/J  |D/K  |A/L  |SG/; |  '   |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  | SHFT |
-            // | CTRL | ALT | GUI | ESC | SPC | TAB |   | ENT | BKSP| DEL | GUI | ALT | CTRL |
             bindings = <
-&lt 6 RET  &kp Q        &kp W        &kp E        &kp R        &kp T          &kp Y       &kp U        &kp I        &kp O        &kp P          &lt 1 SPACE
+&to 6      &kp Q        &kp W        &kp E        &kp R        &kp T          &kp Y       &kp U        &kp I        &kp O        &kp P          &to 1
 &kp CAPS   &mt LGUI A   &mt LALT S   &mt LCTRL D  &mt LSHFT F  &kp G          &kp H       &mt RSHFT J  &mt RCTRL K  &mt RALT L   &mt RGUI SEMI  &kp SQT
 &kp LSHFT  &kp Z        &kp X        &kp C        &kp V        &kp B          &kp N       &kp M        &kp COMMA    &kp DOT      &kp FSLH       &kp RSHFT
 &kp LCTRL  &kp LALT     &kp LGUI     &lt 3 ESC    &lt 1 SPACE  &lt 2 TAB      &lt 5 RET   &lt 4 BSPC   &lt 6 DEL    &kp RGUI     &kp RALT       &kp RCTRL
             >;
         };
 
-        // nav
         nav_layer {
-            // -----------------------------------------------------------------------------------------
-            // | BASE |     |     |     |     |     |   |REDO |PASTE|COPY | CUT |UNDO |MOUSE |
-            // | CAPS | GUI | ALT | CTRL| SHFT|     |   |LEFT |DOWN | UP  |RIGHT|CAPS |  '   |
-            // | SHFT |     |     |     |     |     |   |HOME |PG_DN|PG_UP| END | INS | SHFT |
-            // | CTRL | ALT | GUI |MEDIA| BASE|MOUSE|   | SYM | NUM | FUN | GUI | ALT | CTRL |
             bindings = <
-&lt 0 RET  &none        &none        &none        &none        &none          &kp K_REDO  &kp K_PASTE &kp K_COPY   &kp K_CUT    &kp K_UNDO     &lt 2 SPACE
+&to 0      &none        &none        &none        &none        &none          &kp K_REDO  &kp K_PASTE &kp K_COPY   &kp K_CUT    &kp K_UNDO     &to 2
 &kp CAPS   &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none          &kp LEFT    &kp DOWN    &kp UP       &kp RIGHT    &kp CAPS       &kp SQT
 &kp LSHFT  &none        &none        &none        &none        &none          &kp HOME    &kp PG_DN   &kp PG_UP    &kp END      &kp INS        &kp RSHFT
 &kp LCTRL  &kp LALT     &kp LGUI     &none        &none        &none          &kp RET     &kp BSPC    &kp DEL      &kp RGUI     &kp RALT       &kp RCTRL
             >;
         };
 
-        // mouse
         mouse_layer {
-            // -----------------------------------------------------------------------------------------
-            // | NAV  |  Q  |  W  |  E  |  R  |  T  |   | REDO | PASTE | COPY | CUT  | UNDO | MEDIA |
-            // | CAPS | GUI | ALT | CTRL| SHFT|  G  |   |MOVE_L|MOVE_D |MOVE_U|MOVE_R|  ;   |  '    |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |SCRL_L|SCRL_D |SCRL_U|SCRL_R|  /   | SHFT |
-            // | CTRL | ALT | GUI |MEDIA| NAV |BASE |   | RCLK | LCLK  | MCLK | GUI  | ALT  | CTRL |
             bindings = <
-&lt 1 RET  &none        &none        &none        &none        &none          &kp K_REDO     &kp K_PASTE    &kp K_COPY      &kp K_CUT       &kp K_UNDO     &lt 3 SPACE
+&to 1      &none        &none        &none        &none        &none          &kp K_REDO     &kp K_PASTE    &kp K_COPY      &kp K_CUT       &kp K_UNDO     &to 3
 &kp CAPS   &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP    &mmv MOVE_RIGHT &kp SEMI       &kp SQT
 &kp LSHFT  &none        &none        &none        &none        &none          &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP    &msc SCRL_RIGHT &kp FSLH       &kp RSHFT
 &kp LCTRL  &kp LALT     &kp LGUI     &none        &none        &none          &mkp RCLK      &mkp LCLK      &mkp MCLK       &kp RGUI        &kp RALT       &kp RCTRL
             >;
         };
 
-        // media
         media_layer {
-            // -----------------------------------------------------------------------------------------
-            // | MOUSE|  Q  |  W  |  E  |  R  |  T  |   | REDO | PASTE | COPY | CUT  | UNDO | NUM  |
-            // | CAPS | GUI | ALT | CTRL| SHFT|  G  |   |C_PREV|C_VOL_DN|C_VOL_UP|C_NEXT|  ; |  ' |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |   | BT0  | BT1   | BT2   | BT3  |  /  | SHFT |
-            // | CTRL | ALT | GUI |BASE | NAV |MOUSE|   | SYM  | BASE | FUN  | GUI  | ALT  | CTRL |
             bindings = <
-&lt 2 RET  &none        &none        &none        &none        &none          &kp K_REDO   &kp K_PASTE  &kp K_COPY   &kp K_CUT    &kp K_UNDO     &lt 4 SPACE
-&kp CAPS   &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none          &kp C_PREV   &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT   &kp SEMI       &kp SQT
+&to 2      &none        &none        &none        &none        &none          &kp K_REDO   &kp K_PASTE  &kp K_COPY   &kp K_CUT    &kp K_UNDO     &to 4
+&kp CAPS   &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none          &kp C_PREV   &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT   &out OUT_TOG   &kp SQT
 &kp LSHFT  &none        &none        &none        &none        &none          &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR     &kp RSHFT
 &kp LCTRL  &kp LALT     &kp LGUI     &none        &none        &none          &kp C_PAUSE    &kp C_PP   &kp C_MUTE   &kp RGUI     &kp RALT       &kp RCTRL
             >;
         };
 
-        // num
         num_layer {
-            // -----------------------------------------------------------------------------------------
-            // | MEDIA| LBKT|  N7 |  N8 |  N9 | RBKT|   |  Y  |  U   |  I  |  O  |  P  | SYM  |
-            // | CAPS | SEMI|  N4 |  N5 |  N6 |EQUAL|   |  H  | SHFT |CTRL | ALT | GUI |  '   |
-            // | SHFT |GRAVE|  N1 |  N2 |  N3 | BSLH|   |  N  |  M   |  ,  |  .  |  /  | SHFT |
-            // | CTRL | ALT | GUI |MEDIA| NAV |MOUSE|   | SYM  | BASE | FUN  | GUI | ALT | CTRL |
             bindings = <
-&lt 3 RET  &kp LBKT     &kp N7       &kp N8       &kp N9       &kp RBKT       &none       &none        &none        &none        &none          &lt 5 SPACE
+&to 3      &kp LBKT     &kp N7       &kp N8       &kp N9       &kp RBKT       &none       &none        &none        &none        &none          &to 5
 &kp CAPS   &kp SEMI     &kp N4       &kp N5       &kp N6       &kp EQUAL      &none       &kp RSHFT    &kp RCTRL    &kp RALT     &kp RGUI       &kp SQT
 &kp LSHFT  &kp GRAVE    &kp N1       &kp N2       &kp N3       &kp BSLH       &none       &none        &none        &none        &none          &kp RSHFT
 &kp LCTRL  &kp LALT     &kp LGUI     &kp DOT      &kp N0       &kp MINUS      &none       &none        &none        &kp RGUI     &kp RALT       &kp RCTRL
             >;
         };
 
-        // sym
         sym_layer {
-            // -----------------------------------------------------------------------------------------
-            // | NUM  | LBRC| AMPS| STAR| LPAR| RBRC|   |  Y  |  U   |  I  |  O  |  P  | FUN  |
-            // | CAPS |COLON| DLLR|PRCNT|CARET| PLUS|   |  H  | SHFT |CTRL | ALT | GUI |  '   |
-            // | SHFT |TILDE| EXCL|  AT |POUND| PIPE|   |  N  |  M   |  ,  |  .  |  /  | SHFT |
-            // | CTRL | ALT | GUI |MEDIA| NAV |MOUSE|   | BASE | NUM  | FUN  | GUI | ALT | CTRL |
             bindings = <
-&lt 4 RET  &kp LBRC     &kp AMPS     &kp STAR     &kp LPAR     &kp RBRC       &none       &none        &none        &none        &none          &lt 6 SPACE
+&to 4      &kp LBRC     &kp AMPS     &kp STAR     &kp LPAR     &kp RBRC       &none       &none        &none        &none        &none          &to 6
 &kp CAPS   &kp COLON    &kp DLLR     &kp PRCNT    &kp CARET    &kp PLUS       &none       &kp RSHFT    &kp RCTRL    &kp RALT     &kp RGUI       &kp SQT
 &kp LSHFT  &kp TILDE    &kp EXCL     &kp AT       &kp POUND    &kp PIPE       &none       &none        &none        &none        &none          &kp RSHFT
 &kp LCTRL  &kp LALT     &kp LGUI     &kp LPAR     &kp RPAR     &kp UNDER      &none       &none        &none        &kp RGUI     &kp RALT       &kp RCTRL
             >;
         };
 
-        // fun
         fun_layer {
-            // -----------------------------------------------------------------------------------------
-            // |  SYM | F12 |  F7 |  F8 |  F9 |PSCRN|   |  Y  |  U   |  I  |  O  |  P  | BASE |
-            // | CAPS | F11 |  F4 |  F5 |  F6 | SLCK|   |  H  | SHFT |CTRL | ALT | GUI |  '   |
-            // | SHFT | F10 |  F1 |  F2 |  F3 |PAUSE_BREAK|   |  N  |  M   |  ,  |  .  |  /  | SHFT |
-            // | CTRL | ALT | GUI |K_APP| SPC | TAB |   | SYM  | NUM  | BASE | GUI | ALT | CTRL |
             bindings = <
-&lt 5 RET  &kp F12      &kp F7       &kp F8       &kp F9       &kp PSCRN       &none       &none        &none        &none        &none          &lt 0 SPACE
+&to 5      &kp F12      &kp F7       &kp F8       &kp F9       &kp PSCRN       &none       &none        &none        &none        &none          &to 0
 &kp CAPS   &kp F11      &kp F4       &kp F5       &kp F6       &kp SLCK        &none       &kp RSHFT    &kp RCTRL    &kp RALT     &kp RGUI       &kp SQT
 &kp LSHFT  &kp F10      &kp F1       &kp F2       &kp F3       &kp PAUSE_BREAK &none       &none        &none        &none        &none          &kp RSHFT
 &kp LCTRL  &kp LALT     &kp LGUI     &kp K_APP    &kp SPC      &kp TAB         &none       &none        &none        &kp RGUI     &kp RALT       &kp RCTRL
