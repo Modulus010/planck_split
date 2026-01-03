@@ -10,14 +10,14 @@
 
 / {
     behaviors {
-        mt: mt {
+        um: um {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <U_TAPPING_TERM>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-        lt: lt {
+        ul: ul {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <U_TAPPING_TERM>;
@@ -32,9 +32,9 @@
         base_layer {
             bindings = < 
 &to 6      &kp Q       &kp W       &kp E        &kp R        &kp T            &kp Y              &kp U            &kp I            &kp O            &kp P            &to 1
-&kp CAPS   &mt LGUI A  &mt LALT S  &mt LCTRL D  &mt LSHFT F  &kp G            &kp H              &mt LSHFT J      &mt LCTRL K      &mt LALT L       &mt LGUI SEMI    &kp SQT
-&kp LSHFT  &kp Z       &mt RALT X  &kp C        &kp V        &kp B            &kp N              &kp M            &kp COMMA        &mt RALT DOT     &kp SLASH        &kp RSHFT
-&kp LCTRL  &kp LALT    &kp LGUI    &lt 3 ESC    &lt 1 SPACE  &lt 2 TAB        &lt 5 RET          &lt 4 BSPC       &lt 6 DEL        &kp RGUI         &kp RALT         &kp RCTRL
+&kp CAPS   &um LGUI A  &um LALT S  &um LCTRL D  &um LSHFT F  &kp G            &kp H              &um LSHFT J      &um LCTRL K      &um LALT L       &um LGUI SEMI    &kp SQT
+&kp LSHFT  &kp Z       &um RALT X  &kp C        &kp V        &kp B            &kp N              &kp M            &kp COMMA        &um RALT DOT     &kp SLASH        &kp RSHFT
+&kp LCTRL  &kp LALT    &kp LGUI    &ul 3 ESC    &ul 1 SPACE  &ul 2 TAB        &ul 5 RET          &ul 4 BSPC       &ul 6 DEL        &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
 
