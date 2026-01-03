@@ -3,71 +3,86 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/ext_power.h>
+
+#define U_TAPPING_TERM 200
 
 / {
+    behaviors {
+        &mt {
+            tapping-term-ms = <U_TAPPING_TERM>;
+            flavor = "tap-preferred";
+        };
+        
+        &lt {
+            tapping-term-ms = <U_TAPPING_TERM>;
+            flavor = "tap-preferred";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         base_layer {
-            bindings = <
-&to 6      &kp Q        &kp W        &kp E        &kp R        &kp T          &kp Y       &kp U        &kp I        &kp O        &kp P          &to 1
-&kp CAPS   &mt LGUI A   &mt LALT S   &mt LCTRL D  &mt LSHFT F  &kp G          &kp H       &mt RSHFT J  &mt RCTRL K  &mt RALT L   &mt RGUI SEMI  &kp SQT
-&kp LSHFT  &kp Z        &kp X        &kp C        &kp V        &kp B          &kp N       &kp M        &kp COMMA    &kp DOT      &kp FSLH       &kp RSHFT
-&kp LCTRL  &kp LALT     &kp LGUI     &lt 3 ESC    &lt 1 SPACE  &lt 2 TAB      &lt 5 RET   &lt 4 BSPC   &lt 6 DEL    &kp RGUI     &kp RALT       &kp RCTRL
+            bindings = < 
+&to 6      &kp Q       &kp W       &kp E        &kp R        &kp T            &kp Y              &kp U            &kp I            &kp O            &kp P            &to 1
+&kp CAPS   &mt LGUI A  &mt LALT S  &mt LCTRL D  &mt LSHFT F  &kp G            &kp H              &mt LSHFT J      &mt LCTRL K      &mt LALT L       &mt LGUI SEMI    &kp SQT
+&kp LSHFT  &kp Z       &mt RALT X  &kp C        &kp V        &kp B            &kp N              &kp M            &kp COMMA        &mt RALT DOT     &kp SLASH        &kp RSHFT
+&kp LCTRL  &kp LALT    &kp LGUI    &lt 3 ESC    &lt 1 SPACE  &lt 2 TAB        &lt 5 RET          &lt 4 BSPC       &lt 6 DEL        &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
 
         nav_layer {
             bindings = <
-&to 0      &none        &none        &none        &none        &none          &kp K_REDO  &kp K_PASTE &kp K_COPY   &kp K_CUT    &kp K_UNDO     &to 2
-&kp CAPS   &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none          &kp LEFT    &kp DOWN    &kp UP       &kp RIGHT    &kp CAPS       &kp SQT
-&kp LSHFT  &none        &none        &none        &none        &none          &kp HOME    &kp PG_DN   &kp PG_UP    &kp END      &kp INS        &kp RSHFT
-&kp LCTRL  &kp LALT     &kp LGUI     &none        &none        &none          &kp RET     &kp BSPC    &kp DEL      &kp RGUI     &kp RALT       &kp RCTRL
+&to 0      &none       &none       &none        &none        &none            &kp K_AGAIN        &kp K_PASTE      &kp K_COPY       &kp K_CUT        &kp K_UNDO       &to 2
+&kp CAPS   &kp LGUI    &kp LALT    &kp LCTRL    &kp LSHFT    &none            &caps_word         &kp LEFT         &kp DOWN         &kp UP           &kp RIGHT        &kp SQT
+&kp LSHFT  &none       &kp RALT    &none        &none        &none            &kp INS            &kp HOME         &kp PG_DN        &kp PG_UP        &kp END          &kp RSHFT
+&kp LCTRL  &kp LALT    &kp LGUI    &none        &none        &none            &kp RET            &kp BSPC         &kp DEL          &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
 
         mouse_layer {
             bindings = <
-&to 1      &none        &none        &none        &none        &none          &kp K_REDO     &kp K_PASTE    &kp K_COPY      &kp K_CUT       &kp K_UNDO     &to 3
-&kp CAPS   &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP    &mmv MOVE_RIGHT &kp SEMI       &kp SQT
-&kp LSHFT  &none        &none        &none        &none        &none          &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP    &msc SCRL_RIGHT &kp FSLH       &kp RSHFT
-&kp LCTRL  &kp LALT     &kp LGUI     &none        &none        &none          &mkp RCLK      &mkp LCLK      &mkp MCLK       &kp RGUI        &kp RALT       &kp RCTRL
+&to 0      &none       &none       &none        &none        &none            &kp K_AGAIN        &kp K_PASTE      &kp K_COPY       &kp K_CUT        &kp K_UNDO       &to 3
+&kp CAPS   &kp LGUI    &kp LALT    &kp LCTRL    &kp LSHFT    &none            &none              &mmv MOVE_LEFT   &mmv MOVE_DOWN   &mmv MOVE_UP     &mmv MOVE_RIGHT  &kp SQT
+&kp LSHFT  &none       &kp RALT    &none        &none        &none            &none              &msc SCRL_LEFT   &msc SCRL_DOWN   &msc SCRL_UP     &msc SCRL_RIGHT  &kp RSHFT
+&kp LCTRL  &kp LALT    &kp LGUI    &none        &none        &none            &mkp RCLK          &mkp LCLK        &mkp MCLK        &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
 
         media_layer {
             bindings = <
-&to 2      &none        &none        &none        &none        &none          &kp K_REDO   &kp K_PASTE  &kp K_COPY   &kp K_CUT    &kp K_UNDO     &to 4
-&kp CAPS   &kp LGUI     &kp LALT     &kp LCTRL    &kp LSHFT    &none          &kp C_PREV   &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT   &out OUT_TOG   &kp SQT
-&kp LSHFT  &none        &none        &none        &none        &none          &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR     &kp RSHFT
-&kp LCTRL  &kp LALT     &kp LGUI     &none        &none        &none          &kp C_PAUSE    &kp C_PP   &kp C_MUTE   &kp RGUI     &kp RALT       &kp RCTRL
+&to 0      &none       &none       &none        &none        &none            &rgb_ug RGB_TOG    &rgb_ug RGB_EFF  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &to 4
+&kp CAPS   &kp LGUI    &kp LALT    &kp LCTRL    &kp LSHFT    &none            &ext_power EP_TOG  &kp C_PREV       &kp C_VOL_DN     &kp C_VOL_UP     &kp C_NEXT       &kp SQT
+&kp LSHFT  &none       &kp RALT    &none        &none        &none            &out OUT_TOG       &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &kp RSHFT
+&kp LCTRL  &kp LALT    &kp LGUI    &none        &none        &none            &kp C_STOP         &kp C_PP         &kp C_MUTE       &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
 
         num_layer {
             bindings = <
-&to 3      &kp LBKT     &kp N7       &kp N8       &kp N9       &kp RBKT       &none       &none        &none        &none        &none          &to 5
-&kp CAPS   &kp SEMI     &kp N4       &kp N5       &kp N6       &kp EQUAL      &none       &kp RSHFT    &kp RCTRL    &kp RALT     &kp RGUI       &kp SQT
-&kp LSHFT  &kp GRAVE    &kp N1       &kp N2       &kp N3       &kp BSLH       &none       &none        &none        &none        &none          &kp RSHFT
-&kp LCTRL  &kp LALT     &kp LGUI     &kp DOT      &kp N0       &kp MINUS      &none       &none        &none        &kp RGUI     &kp RALT       &kp RCTRL
+&to 3      &kp LBKT    &kp N7      &kp N8       &kp N9       &kp RBKT         &none              &none            &none            &none            &none            &to 5
+&kp CAPS   &kp SEMI    &kp N4      &kp N5       &kp N6       &kp EQUAL        &none              &kp LSHFT        &kp LCTRL        &kp LALT         &kp LGUI         &kp SQT
+&kp LSHFT  &kp GRAVE   &kp N1      &kp N2       &kp N3       &kp BSLH         &none              &none            &none            &kp RALT         &none            &kp RSHFT
+&kp LCTRL  &kp LALT    &kp LGUI    &kp DOT      &kp N0       &kp MINUS        &none              &none            &none            &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
 
         sym_layer {
             bindings = <
-&to 4      &kp LBRC     &kp AMPS     &kp STAR     &kp LPAR     &kp RBRC       &none       &none        &none        &none        &none          &to 6
-&kp CAPS   &kp COLON    &kp DLLR     &kp PRCNT    &kp CARET    &kp PLUS       &none       &kp RSHFT    &kp RCTRL    &kp RALT     &kp RGUI       &kp SQT
-&kp LSHFT  &kp TILDE    &kp EXCL     &kp AT       &kp POUND    &kp PIPE       &none       &none        &none        &none        &none          &kp RSHFT
-&kp LCTRL  &kp LALT     &kp LGUI     &kp LPAR     &kp RPAR     &kp UNDER      &none       &none        &none        &kp RGUI     &kp RALT       &kp RCTRL
+&to 4      &kp LBRC    &kp AMPS    &kp ASTRK    &kp LPAR     &kp RBRC         &none              &none            &none            &none            &none            &to 6
+&kp CAPS   &kp COLON   &kp DLLR    &kp PRCNT    &kp CARET    &kp PLUS         &none              &kp LSHFT        &kp LCTRL        &kp LALT         &kp LGUI         &kp SQT
+&kp LSHFT  &kp TILDE   &kp EXCL    &kp AT       &kp HASH     &kp PIPE         &none              &none            &none            &kp RALT         &none            &kp RSHFT
+&kp LCTRL  &kp LALT    &kp LGUI    &kp LPAR     &kp RPAR     &kp UNDER        &none              &none            &none            &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
 
         fun_layer {
             bindings = <
-&to 5      &kp F12      &kp F7       &kp F8       &kp F9       &kp PSCRN       &none       &none        &none        &none        &none          &to 0
-&kp CAPS   &kp F11      &kp F4       &kp F5       &kp F6       &kp SLCK        &none       &kp RSHFT    &kp RCTRL    &kp RALT     &kp RGUI       &kp SQT
-&kp LSHFT  &kp F10      &kp F1       &kp F2       &kp F3       &kp PAUSE_BREAK &none       &none        &none        &none        &none          &kp RSHFT
-&kp LCTRL  &kp LALT     &kp LGUI     &kp K_APP    &kp SPC      &kp TAB         &none       &none        &none        &kp RGUI     &kp RALT       &kp RCTRL
+&to 5      &kp F12     &kp F7      &kp F8       &kp F9       &kp PSCRN        &none            &none            &none            &none            &none            &to 0
+&kp CAPS   &kp F11     &kp F4      &kp F5       &kp F6       &kp SLCK         &none            &kp LSHFT        &kp LCTRL        &kp LALT         &kp LGUI         &kp SQT
+&kp LSHFT  &kp F10     &kp F1      &kp F2       &kp F3       &kp PAUSE_BREAK  &none            &none            &none            &kp RALT         &none            &kp RSHFT
+&kp LCTRL  &kp LALT    &kp LGUI    &kp K_APP    &kp SPC      &kp TAB          &none            &none            &none            &kp RGUI         &kp RALT         &kp RCTRL
             >;
         };
     };
