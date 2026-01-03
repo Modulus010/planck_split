@@ -10,7 +10,8 @@ config ZMK_KEYBOARD_NAME
 
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
-endif
+
+endif # BOARD_PLANCK_LEFT
 
 if BOARD_PLANCK_LEFT || BOARD_PLANCK_RIGHT
 
@@ -18,40 +19,33 @@ config ZMK_SPLIT
     default y
 
 config BT_CTLR
-    default BT
+    default y if BT
 
 if USB
-
 config USB_NRFX
     default y
 
 config USB_DEVICE_STACK
     default y
-
 endif # USB
 
-if ZMK_DISPLAY
-
-# config I2C
-#     default y
 #
-# config SSD1306
-#     default y
+# Display / Bus defaults
+#
+config I2C
+    default y
 
-# config LPM009M360A
-# 	default n
+config SPI
+    default y
+
+if ZMK_DISPLAY
+# OLED / LCD 具体驱动放到 shield / overlay
 endif # ZMK_DISPLAY
-
 
 if LVGL
 
 config ZMK_DISPLAY_DEDICATED_THREAD_STACK_SIZE
-    default 8192
-
-#config LV_HOR_RES_MAX
-#   default 128
-#config LV_VER_RES_MAX
-#   default 32
+    default 2048
 
 config LV_Z_VDB_SIZE
     default 64
@@ -68,13 +62,4 @@ endchoice
 
 endif # LVGL
 
-# config ZMK_WIDGET_WPM_STATUS
-#   default y
-
-config I2C
-    default y
-
-config SPI
-    default y
-
-endif
+endif # BOARD_PLANCK_LEFT || BOARD_PLANCK_RIGHT
