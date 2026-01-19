@@ -5,10 +5,10 @@
 
 config BOARD_PLANCK_LEFT
     bool "PLANCK ortholinear 4x6 split keyboard (left)"
-    depends on SOC_NRF52840_QIAA
-
-
+    depends on SOC_SERIES_NRF52X
+    select SOC_NRF52840_QIAA
 
 config BOARD_PLANCK_RIGHT
     bool "PLANCK ortholinear 4x6 split keyboard (right)"
-    depends on SOC_NRF52840_QIAA
+    depends on SOC_SERIES_NRF52X
+    select SOC_NRF52840_QIAA
