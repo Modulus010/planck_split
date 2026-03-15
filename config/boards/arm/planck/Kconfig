@@ -1,2 +1,0 @@
-# Planck Split board Kconfig
-# DCDC is configured via Devicetree (reg0/reg1) in planck_left.dts and planck_right.dts

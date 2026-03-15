@@ -1,5 +1,4 @@
----
+# Build matrix for ZMK boards
 include:
-  - board: planck_left
-  - board: planck_right
-
+  - board: planck_left//zmk
+  - board: planck_right//zmk

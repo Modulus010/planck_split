@@ -1,0 +1,8 @@
+# Planck Left board configuration
+
+config BOARD_PLANCK_LEFT
+    select SOC_NRF52840_QIAA
+
+if BOARD_PLANCK_LEFT
+# Any left-side specific configurations
+endif
