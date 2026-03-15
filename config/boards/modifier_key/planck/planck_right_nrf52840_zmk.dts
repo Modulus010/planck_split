@@ -1,3 +1,4 @@
+/dts-v1/;
 #include "planck.dtsi"
 #include "leds_right.dtsi"
 

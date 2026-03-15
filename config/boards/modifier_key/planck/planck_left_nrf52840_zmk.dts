@@ -1,6 +1,10 @@
+/dts-v1/;
 #include "planck.dtsi"
-#include <dt-bindings/led/led.h>
 #include "leds_left.dtsi"
+
+zephyr_udc0: &usbd {
+    status = "okay";
+};
 
 &reg0 {
     status = "okay";

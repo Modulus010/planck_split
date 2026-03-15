@@ -8,6 +8,13 @@ config ZMK_KEYBOARD_NAME
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
+# BT_MAX_CONN = 外围设备数(1) + 蓝牙配置文件数(5) = 6
+config BT_MAX_CONN
+    default 6
+
+config BT_MAX_PAIRED
+    default 6
+
 endif # BOARD_PLANCK_LEFT
 
 if BOARD_PLANCK_LEFT || BOARD_PLANCK_RIGHT

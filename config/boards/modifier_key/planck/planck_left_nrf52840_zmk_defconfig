@@ -14,13 +14,6 @@ CONFIG_ZMK_USB=y
 CONFIG_ZMK_BLE=y
 
 #
-# Split Keyboard - Central 需要设置 BT 连接数
-# BT_MAX_CONN = 外围设备数(1) + 蓝牙配置文件数(5) = 6
-#
-CONFIG_BT_MAX_CONN=6
-CONFIG_BT_MAX_PAIRED=6
-
-#
 # Build / Flash
 #
 CONFIG_BUILD_OUTPUT_UF2=y
