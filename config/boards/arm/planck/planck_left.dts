@@ -2,9 +2,6 @@
 #include <dt-bindings/led/led.h>
 #include "leds_left.dtsi"
 
-&left_encoder {
-    status = "okay";
-};
 &reg0 {
     status = "okay";
 };

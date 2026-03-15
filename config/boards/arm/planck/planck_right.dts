@@ -5,8 +5,11 @@
 &default_transform {
 	col-offset = <24>;
 };
-&right_encoder {
+&reg0 {
     status = "okay";
+};
+&reg1 {
+    regulator-initial-mode = <NRF5X_REG_MODE_DCDC>;
 };
 
 &matrix_physical_layout {
