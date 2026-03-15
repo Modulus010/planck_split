@@ -1,4 +1,4 @@
-# Planck Right board configuration
+# SPDX-License-Identifier: MIT
 
 config BOARD_PLANCK_RIGHT
     select SOC_NRF52840_QIAA

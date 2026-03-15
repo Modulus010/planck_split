@@ -1,13 +1,5 @@
-/*
- * Planck Split - Macros
- *
- * SPDX-License-Identifier: MIT
- *
- * Miryoku-inspired shift-function macros and BT profile selectors.
- * Extracted from planck.keymap for modularity.
- */
+/* SPDX-License-Identifier: MIT */
 
-/* Generic macro definition helper */
 #define U_MACRO(name,...) \
 / { \
     macros { \
@@ -19,10 +11,6 @@
     }; \
 };
 
-/*
- * MIRYOKU_SHIFT_FUNCTION: Mod-morph behavior
- * Normal press = BINDING, shifted press = SHIFT_BINDING
- */
 #define MIRYOKU_SHIFT_FUNCTION(NAME, BINDING, SHIFT_BINDING) \
 / { \
     behaviors { \
@@ -35,19 +23,10 @@
     }; \
 };
 
-/*
- * MIRYOKU_SHIFT_MACRO: Combines a macro + mod-morph
- * Normal press = BINDING, shifted press = executes SHIFT_BINDING via macro
- * Used for BT profile selection with shift-to-clear pattern.
- */
 #define MIRYOKU_SHIFT_MACRO(NAME, BINDING, SHIFT_BINDING) \
 U_MACRO(u_macro_ ## NAME, wait-ms = <0>; bindings = <SHIFT_BINDING>;) \
 MIRYOKU_SHIFT_FUNCTION(NAME, BINDING, &u_macro_ ## NAME)
 
-/*
- * Bluetooth profile selectors
- * Tap = select profile, Shift+tap = select + clear profile
- */
 MIRYOKU_SHIFT_MACRO(u_bt_sel_0, &bt BT_SEL 0, &bt BT_SEL 0 &bt BT_CLR)
 MIRYOKU_SHIFT_MACRO(u_bt_sel_1, &bt BT_SEL 1, &bt BT_SEL 1 &bt BT_CLR)
 MIRYOKU_SHIFT_MACRO(u_bt_sel_2, &bt BT_SEL 2, &bt BT_SEL 2 &bt BT_CLR)

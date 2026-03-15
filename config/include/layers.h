@@ -1,11 +1,4 @@
-/*
- * Planck Split - Layer Definitions
- *
- * SPDX-License-Identifier: MIT
- *
- * Semantic layer names for use in keymap and behaviors.
- * Avoids magic numbers throughout configuration files.
- */
+/* SPDX-License-Identifier: MIT */
 
 #pragma once
 

@@ -1,11 +1,4 @@
-/*
- * Planck Split - Custom Behaviors
- *
- * SPDX-License-Identifier: MIT
- *
- * Hold-tap behaviors for home row mods and layer access.
- * Extracted from planck.keymap for modularity.
- */
+/* SPDX-License-Identifier: MIT */
 
 #include "layers.h"
 
@@ -13,10 +6,6 @@
 
 / {
     behaviors {
-        /*
-         * um: hold for modifier, tap for keypress
-         * Used for home row mods (e.g., &um LGUI A)
-         */
         um: um {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -25,10 +14,6 @@
             bindings = <&kp>, <&kp>;
         };
 
-        /*
-         * ul: hold for layer, tap for keypress
-         * Used for thumb cluster layer access (e.g., &ul NAV SPACE)
-         */
         ul: ul {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;

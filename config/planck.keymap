@@ -1,10 +1,5 @@
 /*
- * Planck Split Keymap
- *
  * SPDX-License-Identifier: MIT
- *
- * 7-layer Miryoku-inspired layout for 4x12 split ortholinear.
- * Layers: BASE (QWERTY + home row mods), NAV, MOUSE, MEDIA, NUM, SYM, FUN
  */
 
 #include <behaviors.dtsi>

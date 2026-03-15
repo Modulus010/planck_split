@@ -1,6 +1,4 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
- *
  * SPDX-License-Identifier: MIT
  */
 
@@ -31,8 +29,6 @@
             RC(0,18) RC(0,19) RC(0,20) RC(0,21) RC(0,22) RC(0,23)  RC(0,42) RC(0,43) RC(0,44) RC(0,45) RC(0,46) RC(0,47)
         >;
     };
-
-
 
     matrix_physical_layout: matrix_physical_layout {
         compatible = "zmk,physical-layout";
@@ -112,13 +108,7 @@
     status = "okay";
 };
 
-
-
 &flash0 {
-    /*
-     * For more information, see:
-     * http://docs.zephyrproject.org/latest/devices/dts/flash_partitions.html
-     */
     partitions {
         compatible = "fixed-partitions";
         #address-cells = <1>;
@@ -130,20 +120,9 @@
         code_partition: partition@26000 {
             reg = <0x00026000 0x000c6000>;
         };
-
-        /*
-         * The flash starting at 0x000ec000 and ending at
-         * 0x000f3fff is reserved for use by the application.
-         */
-
-        /*
-         * Storage partition will be used by FCB/LittleFS/NVS
-         * if enabled.
-         */
         storage_partition: partition@ec000 {
             reg = <0x000ec000 0x00008000>;
         };
-
         boot_partition: partition@f4000 {
             reg = <0x000f4000 0x0000c000>;
         };

@@ -2,97 +2,103 @@
 
 [![Build ZMK firmware](https://github.com/Modulus010/planck_split/actions/workflows/build.yml/badge.svg)](https://github.com/Modulus010/planck_split/actions/workflows/build.yml)
 
-ZMK firmware configuration for a custom split Planck keyboard (4×6 per side, 48 keys total).
+自定义分体 Planck 键盘的 ZMK 固件，基于 nRF52840 自研 PCB。
 
-## Hardware
+## 硬件
 
-| Component | Specification |
-|-----------|--------------|
-| MCU | nRF52840 (integrated, not a dev board) |
-| Layout | 4×12 split ortholinear (24 keys per side) |
-| Key Scan | Direct GPIO (no diode matrix) |
-| Encoders | Alps EC11 rotary encoder per side |
-| LEDs | 3× PWM-driven LEDs per side |
-| Battery | nRF VDDH battery monitoring |
-| Connectivity | BLE 5.0 (central + peripheral split) + USB |
-| Compatible | `yangxing,planck` |
+| 项目 | 规格 |
+|------|------|
+| MCU | nRF52840（板载，非开发板） |
+| 布局 | 4×12 split ortholinear（每侧 24 键） |
+| 扫描方式 | Direct GPIO（无二极管矩阵） |
+| LED | 每侧 3× PWM LED |
+| 电池检测 | nRF VDDH 内部采样 |
+| 连接 | BLE 5.0（split）+ USB |
+| 电源 | DCDC reg0 + reg1 |
 
-## Layers
+## 层级
 
-| # | Layer | Activation | Description |
-|---|-------|-----------|-------------|
-| 0 | BASE | Default | QWERTY with home row mods (GACS) |
-| 1 | NAV | Hold: Space | Navigation, clipboard, caps word |
-| 2 | MOUSE | Hold: Tab | Mouse movement and scrolling |
-| 3 | MEDIA | Hold: Esc | Media controls, RGB, Bluetooth |
-| 4 | NUM | Hold: Bksp | Number pad and arithmetic |
-| 5 | SYM | Hold: Enter | Symbols |
-| 6 | FUN | Hold: Del | Function keys (F1–F12) |
+7 层 Miryoku 风格布局，通过拇指键 hold 触发：
 
-Layers also chain via top-left/top-right `&to` keys: BASE → NAV → MOUSE → MEDIA → NUM → SYM → FUN → BASE.
+| # | Layer | 触发 | 说明 |
+|---|-------|------|------|
+| 0 | BASE | 默认 | QWERTY + home row mods (GACS) |
+| 1 | NAV | Hold Space | 导航、剪贴板、caps word |
+| 2 | MOUSE | Hold Tab | 鼠标移动和滚轮 |
+| 3 | MEDIA | Hold Esc | 媒体控制、RGB、蓝牙 |
+| 4 | NUM | Hold Bksp | 数字键盘 |
+| 5 | SYM | Hold Enter | 符号 |
+| 6 | FUN | Hold Del | F1–F12 |
 
-## Building
+左上/右上角 `&to` 键可循环切层：BASE → NAV → MOUSE → MEDIA → NUM → SYM → FUN → BASE
 
-Firmware builds automatically via GitHub Actions on push to `config/` or `build.yaml`.
+## 构建
 
-### Manual build (GitHub Actions)
+固件通过 GitHub Actions 自动构建，push `config/` 或 `build.yaml` 即触发。
 
-1. Push changes to the repository
-2. Go to **Actions** → **Build ZMK firmware**
-3. Download the firmware artifacts (`planck_left` and `planck_right` UF2 files)
+### 下载固件
 
-### Local build
+1. Push 代码到仓库
+2. 进入 **Actions** → **Build ZMK firmware**
+3. 下载 artifact（`planck_left` 和 `planck_right` 的 UF2 文件）
+
+### 本地构建
 
 ```bash
-# Clone with west
 west init -l config
 west update
 
-# Build left half
-west build -s zmk/app -b planck_left -- -DZMK_CONFIG="$(pwd)/config"
+# 左手
+west build -s zmk/app -b planck_left//zmk -- -DZMK_CONFIG="$(pwd)/config"
 
-# Build right half
-west build -s zmk/app -b planck_right -- -DZMK_CONFIG="$(pwd)/config"
+# 右手
+west build -s zmk/app -b planck_right//zmk -- -DZMK_CONFIG="$(pwd)/config"
 ```
 
-## Flashing
+## 刷写
 
-1. Put the board into UF2 bootloader mode (double-tap reset)
-2. Copy the `.uf2` file to the mounted drive:
+1. 双击 reset 进入 UF2 bootloader
+2. 复制 `.uf2` 到挂载的驱动器：
    ```bash
-   # macOS/Linux
-   cp build/zephyr/zmk.uf2 /Volumes/NRF52BOOT/   # macOS
-   cp build/zephyr/zmk.uf2 /media/$USER/NRF52BOOT/ # Linux
+   # macOS
+   cp build/zephyr/zmk.uf2 /Volumes/NRF52BOOT/
+   # Linux
+   cp build/zephyr/zmk.uf2 /media/$USER/NRF52BOOT/
    ```
-3. Flash the **left (central) half first**, then the right (peripheral)
+3. 先刷左手（central），再刷右手（peripheral）
 
-## Repository Structure
+## 目录结构
 
 ```
 ├── config/
-│   ├── west.yml                    # West manifest (ZMK dependency)
-│   ├── planck.keymap               # Layer bindings
-│   ├── planck.conf                 # Global Kconfig
-│   ├── planck.json                 # Physical layout (for editors)
+│   ├── west.yml                     # West manifest
+│   ├── planck.keymap                # 键位映射
+│   ├── planck.conf                  # 用户配置（功能开关）
+│   ├── planck.json                  # Physical layout（编辑器用）
 │   ├── include/
-│   │   ├── behaviors.dtsi          # Hold-tap behaviors (home row mods, layer access)
-│   │   ├── macros.dtsi             # Shift-function macros, BT selectors
-│   │   └── layers.h                # Semantic layer name definitions
-│   └── boards/arm/planck/          # Board definition (custom PCB)
-│       ├── planck.dtsi             # Shared hardware: SoC, matrix, layout, sensors
-│       ├── planck_left.dts         # Left half: GPIO pins, encoder, LEDs
-│       ├── planck_right.dts        # Right half: GPIO pins, encoder, LEDs
-│       ├── planck_{left,right}_defconfig  # Kconfig defaults per half
-│       ├── leds_{left,right}.dtsi  # PWM LED definitions
-│       └── Kconfig.*               # Board Kconfig fragments
-├── build.yaml                      # ZMK build matrix
-└── .github/workflows/build.yml     # CI build workflow
+│   │   ├── layers.h                 # 层级定义
+│   │   ├── behaviors.dtsi           # Hold-tap behaviors
+│   │   └── macros.dtsi              # BT 选择器宏
+│   └── boards/modifier_key/planck/  # 板级定义
+│       ├── board.yml                # HWMv2 板级描述
+│       ├── board.cmake              # Flash runners
+│       ├── planck.dtsi              # 共享硬件：SoC、矩阵、布局
+│       ├── planck_left_nrf52840_zmk.dts   # 左手 DTS
+│       ├── planck_right_nrf52840_zmk.dts  # 右手 DTS
+│       ├── planck_left_nrf52840_zmk_defconfig  # 左手 defconfig
+│       ├── planck_right_nrf52840_zmk_defconfig # 右手 defconfig
+│       ├── leds_left.dtsi           # 左手 PWM LED
+│       ├── leds_right.dtsi          # 右手 PWM LED
+│       ├── Kconfig.defconfig        # 板级 Kconfig 默认值
+│       ├── Kconfig.planck_left      # 左手 Kconfig
+│       └── Kconfig.planck_right     # 右手 Kconfig
+├── build.yaml                       # 构建矩阵
+└── .github/workflows/build.yml      # CI 工作流
 ```
 
-## Bluetooth
+## 蓝牙
 
-- 5 BT profiles (0–4) on the MEDIA layer
-- Tap a profile key to select, Shift+tap to select and clear
-- Enhanced TX power (+8 dBm) for range
-- Experimental connection optimization enabled
-- Central (left) fetches and proxies peripheral (right) battery level
+- 5 个 BT 配置文件（0–4），在 MEDIA 层切换
+- 点按选择配置文件，Shift+点按选择并清除
+- 发射功率 +8 dBm
+- 左手获取并代理右手电池电量

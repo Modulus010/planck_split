@@ -1,4 +1,4 @@
-# Planck Split board configuration
+# SPDX-License-Identifier: MIT
 
 if BOARD_PLANCK_LEFT
 
@@ -8,7 +8,7 @@ config ZMK_KEYBOARD_NAME
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
-# BT_MAX_CONN = 外围设备数(1) + 蓝牙配置文件数(5) = 6
+# 蓝牙连接数 = 外围设备(1) + 配置文件(5)
 config BT_MAX_CONN
     default 6
 

@@ -1,26 +1,17 @@
 # SPDX-License-Identifier: MIT
-# Planck Split Right (Peripheral) - nRF52840
 
-#
-# Clock - 使用内部 RC 振荡器并启用校准
-#
+# 时钟：内部 RC 振荡器 + 校准
 CONFIG_CLOCK_CONTROL_NRF_K32SRC_RC=y
 CONFIG_CLOCK_CONTROL_NRF_K32SRC_RC_CALIBRATION=y
 
-#
-# ZMK Core - 右手作为外围设备
-#
+# 核心功能
 CONFIG_ZMK_BLE=y
 
-#
-# Build / Flash
-#
+# 构建输出
 CONFIG_BUILD_OUTPUT_UF2=y
 CONFIG_USE_DT_CODE_PARTITION=y
 
-#
-# PWM / LED (hardware capability)
-#
+# PWM LED
 CONFIG_PWM=y
 CONFIG_LED=y
 CONFIG_LED_PWM=y
